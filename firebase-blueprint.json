@@ -1,0 +1,65 @@
+{
+  "entities": {
+    "Category": {
+      "title": "Nomination Category",
+      "description": "A nomination category for the farewell party.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "order": { "type": "integer" }
+      },
+      "required": ["name", "order"]
+    },
+    "Candidate": {
+      "title": "Nomination Candidate",
+      "description": "A candidate within a nomination category.",
+      "type": "object",
+      "properties": {
+        "categoryId": { "type": "string" },
+        "name": { "type": "string" },
+        "class": { "type": "string" },
+        "photoUrl": { "type": "string" }
+      },
+      "required": ["categoryId", "name", "class"]
+    },
+    "Vote": {
+      "title": "Vote",
+      "description": "A vote cast by a user for a candidate in a category.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "categoryId": { "type": "string" },
+        "candidateId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "categoryId", "candidateId", "createdAt"]
+    },
+    "Settings": {
+      "title": "Application Settings",
+      "description": "Global settings for the application.",
+      "type": "object",
+      "properties": {
+        "votingOpen": { "type": "boolean" }
+      },
+      "required": ["votingOpen"]
+    }
+  },
+  "firestore": {
+    "/categories/{categoryId}": {
+      "schema": "Category",
+      "description": "Collection of nomination categories."
+    },
+    "/candidates/{candidateId}": {
+      "schema": "Candidate",
+      "description": "Collection of candidates across all categories."
+    },
+    "/votes/{voteId}": {
+      "schema": "Vote",
+      "description": "Collection of votes cast by users."
+    },
+    "/settings/{settingId}": {
+      "schema": "Settings",
+      "description": "Global application configuration."
+    }
+  }
+}
